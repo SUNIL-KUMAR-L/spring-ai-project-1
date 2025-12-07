@@ -1,6 +1,7 @@
 package com.sunilkumarl.springai.service;
 
 import com.sunilkumarl.springai.model.Customer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -12,9 +13,9 @@ public class CustomerService {
 
     private final RestClient restClient;
 
-    public CustomerService(RestClient.Builder builder) {
+    public CustomerService(RestClient.Builder builder, @Value("${external.service.url:http://localhost:3000}") String baseurl) {
         this.restClient = builder
-                .baseUrl("http://localhost:3000")
+                .baseUrl(baseurl)
                 .defaultHeader("Accept", "application/json")
                 .defaultHeader("Content-Type", "application/json")
                 .build();
