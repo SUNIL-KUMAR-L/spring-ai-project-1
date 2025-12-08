@@ -1,0 +1,269 @@
+{
+  "name": "Customer Ordered Products Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        0
+      ],
+      "id": "29f6b9ce-6bdc-4ec8-b36b-a9a9303dfb51",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -352,
+        0
+      ],
+      "id": "e7588489-2f53-4b58-9943-9f213ca52401",
+      "name": "When chat message received",
+      "webhookId": "dcc9454f-2b63-4ebb-8068-e91b6f14fdef"
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are Customer Orders Data Assistant.\n\nYou always respond based on the data you have from tools available to you.\n\nIf you don't know the answer, you will respond with \"I don't know\".\n                       \nYour task:\n\nReceive a customer_name from the user.\n\nCall right tool to fetch Customer, Orders, Products  \n\nExpected final output is List of distinct Products data as per the Customer's orders.\n\nIf no orders or no products exist, return an empty list.\n\nIMPORTANT RULES\n\nAlways follow Tool → Extract → Next Tool flow strictly.\n\nDo not infer or guess customer_id — it must come from getCustomerData.\n\nIf the user input is unclear or missing customer_name, ask for clarification.\n\nOutput only the final List of distinct Products data unless the user asks for more. "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -32,
+        0
+      ],
+      "id": "0c30b268-a58c-44d2-8b4d-1cb0ebe911e2",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "=gpt-oss:20b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        176
+      ],
+      "id": "d62edec3-6401-437a-878d-beac4fb36648",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "I0UCOy8C0p3BINVQ",
+          "name": "Ollama account local"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Fetch customer data given the customer_name",
+        "url": "http://localhost:3000/customers",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "customer_name",
+              "value": "={{ $fromAI(\"customer_name\", \"Customer name\", \"string\") }}"
+            }
+          ]
+        },
+        "options": {},
+        "optimizeResponse": true,
+        "fieldsToInclude": "except",
+        "fields": "id"
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        560,
+        128
+      ],
+      "id": "68bc344f-ad33-4e3d-bc6c-21ce0c92d5a3",
+      "name": "getCustomerData"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Fetch Orders data given the `customer_id`",
+        "url": "http://localhost:3000/orders",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "=customer_id",
+              "value": "={{ $fromAI(\"customer_id\", \"Customer id\", \"number\") }}"
+            }
+          ]
+        },
+        "options": {},
+        "optimizeResponse": true,
+        "fieldsToInclude": "except",
+        "fields": "id"
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        784,
+        112
+      ],
+      "id": "bf8f6b90-41a2-4ab8-80ee-bfcd303ec0cd",
+      "name": "getOrderData"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Fetch all Products",
+        "url": "http://localhost:3000/products",
+        "options": {},
+        "optimizeResponse": true,
+        "fieldsToInclude": "except",
+        "fields": "id"
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        1008,
+        64
+      ],
+      "id": "405785d0-89ca-42a9-96ac-da030c36b5ca",
+      "name": "GetAllProducts"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n \n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"product_id\": {\n        \"type\": \"number\"\n      },\n      \"product_desc\": {\n        \"type\": \"string\"\n      },\n      \"product_image_url\": {\n        \"type\": \"string\"\n      },\n      \"product_category\": {\n        \"type\": \"string\"\n      }\n    },\n    \"required\": [\n      \n    ]\n  }\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1168,
+        -16
+      ],
+      "id": "b0403ade-1da6-497b-953f-ebb1f517c01a",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $execution.id }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -16,
+        176
+      ],
+      "id": "372565ce-c9d1-4484-ab9a-bd9e51e2ea38",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "getCustomerData": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "getOrderData": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GetAllProducts": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "abdb8407-aa9f-467b-91ce-becebfb978e3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7889e5bcc6b05b04a48bd77fb209f713a23a52344556e4c4f31896ddc35e2aef"
+  },
+  "id": "ejmRU63urxsSlhYH",
+  "tags": []
+}
