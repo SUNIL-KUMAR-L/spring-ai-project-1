@@ -54,34 +54,7 @@ public class LangchainCustomerOrderTools {
         return orders;
     }
 
-    //@Tool(name = "getAllProducts", description = "Fetch all Products")
-   // @Tool("Fetch all Products")
-    public List<Product> getAllProducts() {
-        System.out.println("Tool (getAllProducts) NO ARGUMENTS ");
-        List<Product> products = productService.findAll();
-        System.out.println("List of all Products : "+ products);
-        return products;
-    }
 
-    //@Tool(name = "getProductById", description = "Fetch product data given the product_id")
-    //@Tool("Fetch product data given the product_id")
-    public Product getProductById(Integer product_id) {
-        System.out.println("Tool (getProductById) : ARGUMENTS by id : " + product_id);
-        List<Product> products = productService.findProductById(product_id);
-        if(products != null && products.size() > 0) {
-            if (products.size() == 1) {
-                System.out.println("Product look by id :" + products.get(0));
-                return products.get(0);
-            } else {
-                System.out.println("Product look by product_id :" + products);
-                System.out.println("many Products data : \n" + products);
-                return products.get(0);
-            }
-        } else {
-            System.err.println("NO Products matching by look by product_id :" + product_id );
-            return null;
-        }
-    }
 
 
     //@Tool(name = "getProductsByProductIdList", description = "Fetch products data given the list of `product_id``")
@@ -116,5 +89,35 @@ public class LangchainCustomerOrderTools {
 
         return foundProduct;
 
+    }
+
+
+    //@Tool(name = "getAllProducts", description = "Fetch all Products")
+   // @Tool("Fetch all Products")
+    public List<Product> getAllProducts() {
+        System.out.println("Tool (getAllProducts) NO ARGUMENTS ");
+        List<Product> products = productService.findAll();
+        System.out.println("List of all Products : "+ products);
+        return products;
+    }
+
+    //@Tool(name = "getProductById", description = "Fetch product data given the product_id")
+   // @Tool("Fetch product data given the product_id")
+    public Product getProductById(Integer product_id) {
+        System.out.println("Tool (getProductById) : ARGUMENTS by id : " + product_id);
+        List<Product> products = productService.findProductById(product_id);
+        if(products != null && products.size() > 0) {
+            if (products.size() == 1) {
+                System.out.println("Product look by id :" + products.get(0));
+                return products.get(0);
+            } else {
+                System.out.println("Product look by product_id :" + products);
+                System.out.println("many Products data : \n" + products);
+                return products.get(0);
+            }
+        } else {
+            System.err.println("NO Products matching by look by product_id :" + product_id );
+            return null;
+        }
     }
 }

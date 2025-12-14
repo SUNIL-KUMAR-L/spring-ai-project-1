@@ -58,30 +58,26 @@ public class MyLangchainController {
         return response;
     }
 
-    @GetMapping("/orders")
+    @GetMapping(name= "getCustomerOrderedProductData", value= "/orders", produces = "application/json")
     public String getCustomerOrderedProductData(@RequestParam(value = "message", defaultValue = "customer name is `Bob Smith`") String message) {
-        //List<Product> productList = agent.getCustomerOrderedProductData(promptText, message);
-        //return productList;
+
         System.out.println("Invoking detailed endpoint... getCustomerOrderedProductData");
         String response =  agent.getCustomerOrderedProductData(litePromptText, message);
         System.out.println("getCustomerOrderedProductData Response from agent: " + response);
-        // Here, you would typically parse the JSON response into a List<Product> object.
-        // For simplicity, we'll return an empty object.
-        return response;
 
+        return response;
     }
 
-    @GetMapping("/detailed")
+
+    @GetMapping( name= "getCustomerOrderedProductDetails",  value ="/detailed", produces = "application/json")
     public String getCustomerOrderedProductDetails
             (@RequestParam(value = "message", defaultValue = "customer name is `Bob Smith`") String message) {
-//        CustomerOrderedProducts customerOrderedProducts = agent.getCustomerOrderedProductDetails(litePromptText, message);
-//        return customerOrderedProducts;
+
         System.out.println("Invoking detailed endpoint... getCustomerOrderedProductDetails");
         String response =  agent.getCustomerOrderedProductDetails(litePromptTextGetProductsInformation, message);
         System.out.println("getCustomerOrderedProductDetails Response from agent: " + response);
-        // Here, you would typically parse the JSON response into a CustomerOrderedProducts object.
-        // For simplicity, we'll return an empty object.
-        return response;//new CustomerOrderedProducts(null, null, null);
+
+        return response;
     }
 
     private final String litePromptText =
@@ -111,9 +107,9 @@ public class MyLangchainController {
                         
                         TASK:
                         Given a customer name, respond back with  
-                        Customer details,  
-                        List of Order details, 
-                        List of Product details purchased by the same customer.
+                        "customer" : customer details ,  
+                        "orders" : List of Order details, 
+                        "products" : List of Product details purchased by the same customer.
                         
                         TOOLS:
                         You have access to external data tools. You MUST use them to retrieve real data. Do NOT fabricate or assume data.
