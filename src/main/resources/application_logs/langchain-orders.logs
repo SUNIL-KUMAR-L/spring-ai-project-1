@@ -1,0 +1,417 @@
+2025-12-14T05:00:42.879-06:00  INFO 1672 --- [springai] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-14T05:00:42.879-06:00  INFO 1672 --- [springai] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-14T05:00:42.880-06:00  INFO 1672 --- [springai] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+Invoking detailed endpoint... getCustomerOrderedProductData
+2025-12-14T05:00:42.969-06:00  INFO 1672 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "    You are a Customer Order Aggregation Assistant.\n\n            TASK:\n            Given a customer name, respond back with\n            Only List of Product details purchased by the same customer.\n\n            TOOLS:\n            You have access to external data tools. You MUST use them to retrieve real data. Do NOT fabricate or assume data.\n\n            RULES:\n            - Always call the appropriate tools to fetch data.\n            - Use tool outputs as the single source of truth.\n            - Return ONLY valid, parsable JSON.\n            - Do NOT include explanations, comments, or extra text outside the JSON.\n            - If no data is found, return empty arrays for orders and products.\n"
+  }, {
+    "role" : "user",
+    "content" : "customer name is `Bob Smith`"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ {
+    "type" : "function",
+    "function" : {
+      "name" : "getCustomerData",
+      "description" : "Fetch customer data given the customer name",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_name" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "customer_name" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "getOrderData",
+      "description" : "Fetch Orders data given the customer_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_id" : {
+            "type" : "integer"
+          }
+        },
+        "required" : [ "customer_id" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "getProductsByProductIdList",
+      "description" : "Fetch products data given the list of product_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "product_ids" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "required" : [ "product_ids" ]
+      }
+    }
+  } ]
+}
+
+2025-12-14T05:01:26.434-06:00  INFO 1672 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP response:
+- status code: 200
+- headers: [content-length: 1384], [content-type: application/json; charset=utf-8], [date: Sun, 14 Dec 2025 11:01:26 GMT]
+- body: {"model":"gpt-oss:20b","created_at":"2025-12-14T11:01:26.4020844Z","message":{"role":"assistant","content":"","thinking":"We need to fetch customer data for Bob Smith, then orders for that customer ID, then product details for products purchased. Finally output JSON: probably like {\"products\": [ ... ]}. The instructions: \"Only List of Product details purchased by the same customer.\" So just list product details. Should we include product details like id, name, price etc. We'll just return array of product objects. Use getCustomerData, getOrderData, getProductsByProductIdList.\n\nSteps:\n1. Call getCustomerData with customer_name \"Bob Smith\". Get response. Might include id.\n2. If not found, return empty array.\n3. Call getOrderData with customer_id from previous.\n4. Get list of order items. But likely orders include product_id. Or maybe need to get product ids from orders.\n5. Then call getProductsByProductIdList with product_ids.\n\nWe need to assume output format of tool. We need to call sequentially.\n\nWe'll call getCustomerData first.","tool_calls":[{"id":"call_9203ng7f","function":{"index":0,"name":"getCustomerData","arguments":{"customer_name":"Bob Smith"}}}]},"done":true,"done_reason":"stop","total_duration":43403274300,"load_duration":485948800,"prompt_eval_count":325,"prompt_eval_duration":6015391100,"eval_count":228,"eval_duration":36619981900}
+
+Tool (getCustomerData) : ARGUMENTS customer look by name :Bob Smith
+customer data : 
+Customer[customer_id=2, customer_name=Bob Smith, email=bob.smith@example.com, phone_number=9123456780]
+2025-12-14T05:01:26.557-06:00  INFO 1672 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "    You are a Customer Order Aggregation Assistant.\n\n            TASK:\n            Given a customer name, respond back with\n            Only List of Product details purchased by the same customer.\n\n            TOOLS:\n            You have access to external data tools. You MUST use them to retrieve real data. Do NOT fabricate or assume data.\n\n            RULES:\n            - Always call the appropriate tools to fetch data.\n            - Use tool outputs as the single source of truth.\n            - Return ONLY valid, parsable JSON.\n            - Do NOT include explanations, comments, or extra text outside the JSON.\n            - If no data is found, return empty arrays for orders and products.\n"
+  }, {
+    "role" : "user",
+    "content" : "customer name is `Bob Smith`"
+  }, {
+    "role" : "assistant",
+    "tool_calls" : [ {
+      "function" : {
+        "name" : "getCustomerData",
+        "arguments" : {
+          "customer_name" : "Bob Smith"
+        }
+      }
+    } ]
+  }, {
+    "role" : "tool",
+    "content" : "{\r\n  \"customer_id\" : 2,\r\n  \"customer_name\" : \"Bob Smith\",\r\n  \"email\" : \"bob.smith@example.com\",\r\n  \"phone_number\" : \"9123456780\"\r\n}"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ {
+    "type" : "function",
+    "function" : {
+      "name" : "getCustomerData",
+      "description" : "Fetch customer data given the customer name",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_name" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "customer_name" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "getOrderData",
+      "description" : "Fetch Orders data given the customer_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_id" : {
+            "type" : "integer"
+          }
+        },
+        "required" : [ "customer_id" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "getProductsByProductIdList",
+      "description" : "Fetch products data given the list of product_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "product_ids" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "required" : [ "product_ids" ]
+      }
+    }
+  } ]
+}
+
+2025-12-14T05:01:33.755-06:00  INFO 1672 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP response:
+- status code: 200
+- headers: [content-length: 525], [content-type: application/json; charset=utf-8], [date: Sun, 14 Dec 2025 11:01:33 GMT]
+- body: {"model":"gpt-oss:20b","created_at":"2025-12-14T11:01:33.7546781Z","message":{"role":"assistant","content":"","thinking":"We need list of product details purchased by this customer. We have customer_id 2. Next get orders.","tool_calls":[{"id":"call_6i4ldtfj","function":{"index":0,"name":"getOrderData","arguments":{"customer_id":2}}}]},"done":true,"done_reason":"stop","total_duration":7196107200,"load_duration":437458800,"prompt_eval_count":401,"prompt_eval_duration":2012873100,"eval_count":48,"eval_duration":4680713500}
+
+Tool (getOrderData) : ARGUMENTS Order look by customer_id : 2
+Order data : 
+[Order[order_id=1003, customer_id=2, order_total=240.0, order_lines=[OrderLine[order_id=1003, order_line_id=1, order_line_seq_id=1, product_id=7, product_price=120.0, product_qty=2]]], Order[order_id=1004, customer_id=2, order_total=199.99, order_lines=[OrderLine[order_id=1004, order_line_id=1, order_line_seq_id=1, product_id=9, product_price=199.99, product_qty=1]]], Order[order_id=1022, customer_id=2, order_total=25.99, order_lines=[OrderLine[order_id=1022, order_line_id=1, order_line_seq_id=1, product_id=1, product_price=25.99, product_qty=1]]], Order[order_id=1032, customer_id=2, order_total=120.0, order_lines=[OrderLine[order_id=1032, order_line_id=1, order_line_seq_id=1, product_id=7, product_price=120.0, product_qty=1]]], Order[order_id=1042, customer_id=2, order_total=85.0, order_lines=[OrderLine[order_id=1042, order_line_id=1, order_line_seq_id=1, product_id=15, product_price=85.0, product_qty=1]]]]
+2025-12-14T05:01:33.791-06:00  INFO 1672 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "    You are a Customer Order Aggregation Assistant.\n\n            TASK:\n            Given a customer name, respond back with\n            Only List of Product details purchased by the same customer.\n\n            TOOLS:\n            You have access to external data tools. You MUST use them to retrieve real data. Do NOT fabricate or assume data.\n\n            RULES:\n            - Always call the appropriate tools to fetch data.\n            - Use tool outputs as the single source of truth.\n            - Return ONLY valid, parsable JSON.\n            - Do NOT include explanations, comments, or extra text outside the JSON.\n            - If no data is found, return empty arrays for orders and products.\n"
+  }, {
+    "role" : "user",
+    "content" : "customer name is `Bob Smith`"
+  }, {
+    "role" : "assistant",
+    "tool_calls" : [ {
+      "function" : {
+        "name" : "getCustomerData",
+        "arguments" : {
+          "customer_name" : "Bob Smith"
+        }
+      }
+    } ]
+  }, {
+    "role" : "tool",
+    "content" : "{\r\n  \"customer_id\" : 2,\r\n  \"customer_name\" : \"Bob Smith\",\r\n  \"email\" : \"bob.smith@example.com\",\r\n  \"phone_number\" : \"9123456780\"\r\n}"
+  }, {
+    "role" : "assistant",
+    "tool_calls" : [ {
+      "function" : {
+        "name" : "getOrderData",
+        "arguments" : {
+          "customer_id" : 2
+        }
+      }
+    } ]
+  }, {
+    "role" : "tool",
+    "content" : "[ {\r\n  \"order_id\" : 1003,\r\n  \"customer_id\" : 2,\r\n  \"order_total\" : 240.0,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1003,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 7,\r\n    \"product_price\" : 120.0,\r\n    \"product_qty\" : 2\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1004,\r\n  \"customer_id\" : 2,\r\n  \"order_total\" : 199.99,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1004,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 9,\r\n    \"product_price\" : 199.99,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1022,\r\n  \"customer_id\" : 2,\r\n  \"order_total\" : 25.99,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1022,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 1,\r\n    \"product_price\" : 25.99,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1032,\r\n  \"customer_id\" : 2,\r\n  \"order_total\" : 120.0,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1032,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 7,\r\n    \"product_price\" : 120.0,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1042,\r\n  \"customer_id\" : 2,\r\n  \"order_total\" : 85.0,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1042,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 15,\r\n    \"product_price\" : 85.0,\r\n    \"product_qty\" : 1\r\n  } ]\r\n} ]"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ {
+    "type" : "function",
+    "function" : {
+      "name" : "getCustomerData",
+      "description" : "Fetch customer data given the customer name",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_name" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "customer_name" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "getOrderData",
+      "description" : "Fetch Orders data given the customer_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_id" : {
+            "type" : "integer"
+          }
+        },
+        "required" : [ "customer_id" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "getProductsByProductIdList",
+      "description" : "Fetch products data given the list of product_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "product_ids" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "required" : [ "product_ids" ]
+      }
+    }
+  } ]
+}
+
+2025-12-14T05:01:53.163-06:00  INFO 1672 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP response:
+- status code: 200
+- headers: [content-length: 437], [content-type: application/json; charset=utf-8], [date: Sun, 14 Dec 2025 11:01:53 GMT]
+- body: {"model":"gpt-oss:20b","created_at":"2025-12-14T11:01:53.1611559Z","message":{"role":"assistant","content":"","tool_calls":[{"id":"call_6tc0xpsx","function":{"index":0,"name":"getProductsByProductIdList","arguments":{"product_ids":[7,9,1,15]}}}]},"done":true,"done_reason":"stop","total_duration":19365199800,"load_duration":442054300,"prompt_eval_count":948,"prompt_eval_duration":15943027300,"eval_count":29,"eval_duration":2845302800}
+
+Tool (getProductsByProductIdList) : ARGUMENTS Product List look up by : [7, 9, 1, 15]
+2025-12-14T05:01:53.182-06:00  INFO 1672 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "    You are a Customer Order Aggregation Assistant.\n\n            TASK:\n            Given a customer name, respond back with\n            Only List of Product details purchased by the same customer.\n\n            TOOLS:\n            You have access to external data tools. You MUST use them to retrieve real data. Do NOT fabricate or assume data.\n\n            RULES:\n            - Always call the appropriate tools to fetch data.\n            - Use tool outputs as the single source of truth.\n            - Return ONLY valid, parsable JSON.\n            - Do NOT include explanations, comments, or extra text outside the JSON.\n            - If no data is found, return empty arrays for orders and products.\n"
+  }, {
+    "role" : "user",
+    "content" : "customer name is `Bob Smith`"
+  }, {
+    "role" : "assistant",
+    "tool_calls" : [ {
+      "function" : {
+        "name" : "getCustomerData",
+        "arguments" : {
+          "customer_name" : "Bob Smith"
+        }
+      }
+    } ]
+  }, {
+    "role" : "tool",
+    "content" : "{\r\n  \"customer_id\" : 2,\r\n  \"customer_name\" : \"Bob Smith\",\r\n  \"email\" : \"bob.smith@example.com\",\r\n  \"phone_number\" : \"9123456780\"\r\n}"
+  }, {
+    "role" : "assistant",
+    "tool_calls" : [ {
+      "function" : {
+        "name" : "getOrderData",
+        "arguments" : {
+          "customer_id" : 2
+        }
+      }
+    } ]
+  }, {
+    "role" : "tool",
+    "content" : "[ {\r\n  \"order_id\" : 1003,\r\n  \"customer_id\" : 2,\r\n  \"order_total\" : 240.0,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1003,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 7,\r\n    \"product_price\" : 120.0,\r\n    \"product_qty\" : 2\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1004,\r\n  \"customer_id\" : 2,\r\n  \"order_total\" : 199.99,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1004,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 9,\r\n    \"product_price\" : 199.99,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1022,\r\n  \"customer_id\" : 2,\r\n  \"order_total\" : 25.99,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1022,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 1,\r\n    \"product_price\" : 25.99,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1032,\r\n  \"customer_id\" : 2,\r\n  \"order_total\" : 120.0,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1032,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 7,\r\n    \"product_price\" : 120.0,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1042,\r\n  \"customer_id\" : 2,\r\n  \"order_total\" : 85.0,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1042,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 15,\r\n    \"product_price\" : 85.0,\r\n    \"product_qty\" : 1\r\n  } ]\r\n} ]"
+  }, {
+    "role" : "assistant",
+    "tool_calls" : [ {
+      "function" : {
+        "name" : "getProductsByProductIdList",
+        "arguments" : {
+          "product_ids" : [ 7, 9, 1, 15 ]
+        }
+      }
+    } ]
+  }, {
+    "role" : "tool",
+    "content" : "[ {\r\n  \"product_id\" : 7,\r\n  \"product_desc\" : \"Bluetooth Speaker\",\r\n  \"product_image_url\" : \"http://example.com/speaker.jpg\",\r\n  \"product_category\" : \"Electronics\"\r\n}, {\r\n  \"product_id\" : 9,\r\n  \"product_desc\" : \"Smartwatch\",\r\n  \"product_image_url\" : \"http://example.com/watch.jpg\",\r\n  \"product_category\" : \"Wearables\"\r\n}, {\r\n  \"product_id\" : 1,\r\n  \"product_desc\" : \"Wireless Mouse\",\r\n  \"product_image_url\" : \"http://example.com/mouse.jpg\",\r\n  \"product_category\" : \"Electronics\"\r\n}, {\r\n  \"product_id\" : 15,\r\n  \"product_desc\" : \"Running Shoes\",\r\n  \"product_image_url\" : \"http://example.com/shoes.jpg\",\r\n  \"product_category\" : \"Fashion\"\r\n} ]"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ {
+    "type" : "function",
+    "function" : {
+      "name" : "getCustomerData",
+      "description" : "Fetch customer data given the customer name",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_name" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "customer_name" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "getOrderData",
+      "description" : "Fetch Orders data given the customer_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_id" : {
+            "type" : "integer"
+          }
+        },
+        "required" : [ "customer_id" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "getProductsByProductIdList",
+      "description" : "Fetch products data given the list of product_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "product_ids" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "required" : [ "product_ids" ]
+      }
+    }
+  } ]
+}
+
+2025-12-14T05:02:14.264-06:00  INFO 1672 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP response:
+- status code: 200
+- headers: [content-length: 902], [content-type: application/json; charset=utf-8], [date: Sun, 14 Dec 2025 11:02:14 GMT]
+- body: {"model":"gpt-oss:20b","created_at":"2025-12-14T11:02:14.2631747Z","message":{"role":"assistant","content":"{\"products\":[{\"product_id\":7,\"product_desc\":\"Bluetooth Speaker\",\"product_image_url\":\"http://example.com/speaker.jpg\",\"product_category\":\"Electronics\"},{\"product_id\":9,\"product_desc\":\"Smartwatch\",\"product_image_url\":\"http://example.com/watch.jpg\",\"product_category\":\"Wearables\"},{\"product_id\":1,\"product_desc\":\"Wireless Mouse\",\"product_image_url\":\"http://example.com/mouse.jpg\",\"product_category\":\"Electronics\"},{\"product_id\":15,\"product_desc\":\"Running Shoes\",\"product_image_url\":\"http://example.com/shoes.jpg\",\"product_category\":\"Fashion\"}]}"},"done":true,"done_reason":"stop","total_duration":21078019000,"load_duration":533897300,"prompt_eval_count":1175,"prompt_eval_duration":6301597500,"eval_count":123,"eval_duration":14004967900}
+
+getCustomerOrderedProductData Response from agent: {"products":[{"product_id":7,"product_desc":"Bluetooth Speaker","product_image_url":"http://example.com/speaker.jpg","product_category":"Electronics"},{"product_id":9,"product_desc":"Smartwatch","product_image_url":"http://example.com/watch.jpg","product_category":"Wearables"},{"product_id":1,"product_desc":"Wireless Mouse","product_image_url":"http://example.com/mouse.jpg","product_category":"Electronics"},{"product_id":15,"product_desc":"Running Shoes","product_image_url":"http://example.com/shoes.jpg","product_category":"Fashion"}]}
+
+
+
+Final response for
+request : http://localhost:8080/api/langchain/chat/orders
+```json
+{
+  "products": [
+    {
+      "product_id": 7,
+      "product_desc": "Bluetooth Speaker",
+      "product_image_url": "http://example.com/speaker.jpg",
+      "product_category": "Electronics"
+    },
+    {
+      "product_id": 9,
+      "product_desc": "Smartwatch",
+      "product_image_url": "http://example.com/watch.jpg",
+      "product_category": "Wearables"
+    },
+    {
+      "product_id": 1,
+      "product_desc": "Wireless Mouse",
+      "product_image_url": "http://example.com/mouse.jpg",
+      "product_category": "Electronics"
+    },
+    {
+      "product_id": 15,
+      "product_desc": "Running Shoes",
+      "product_image_url": "http://example.com/shoes.jpg",
+      "product_category": "Fashion"
+    }
+  ]
+}
+```
