@@ -42,4 +42,11 @@ public class CustomerService {
                 .body(new ParameterizedTypeReference<List<Customer>>() {});
     }
 
+    public List<Customer> findCustomersByAttributeNameAndValue(String customerAttributeName, String customerAttributeValue) {
+        return restClient.get()
+                .uri("/customers?{customerAttributeName}={customerAttributeValue}", customerAttributeName, customerAttributeValue)
+                .retrieve()
+                .body(new ParameterizedTypeReference<List<Customer>>() {});
+    }
+
 }

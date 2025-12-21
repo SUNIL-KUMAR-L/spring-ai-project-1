@@ -9,5 +9,5 @@ package com.sunilkumarl.springai.model;
 
 import java.util.List;
 
-public record Order(Integer order_id, Integer customer_id, Double order_total, List<OrderLine> order_lines) {
+public record Order(Integer order_id, String order_datetime, Integer customer_id, Double order_total, List<OrderLine> order_lines) {
 }

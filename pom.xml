@@ -41,6 +41,7 @@
 			<artifactId>spring-ai-starter-model-ollama</artifactId>
 		</dependency>
 
+
 		<!-- https://mvnrepository.com/artifact/dev.langchain4j/langchain4j -->
 		<dependency>
 			<groupId>dev.langchain4j</groupId>
@@ -53,6 +54,19 @@
 			<groupId>dev.langchain4j</groupId>
 			<artifactId>langchain4j-ollama</artifactId>
 			<version>1.9.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>dev.langchain4j</groupId>
+			<artifactId>langchain4j-agentic</artifactId>
+			<version>1.9.1-beta17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>dev.langchain4j</groupId>
+			<artifactId>langchain4j-embeddings-bge-small-en-v15-q</artifactId>
+			<version>1.9.1-beta17</version>
 		</dependency>
 
 

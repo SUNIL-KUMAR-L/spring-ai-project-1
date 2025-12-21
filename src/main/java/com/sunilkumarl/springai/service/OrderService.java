@@ -1,5 +1,6 @@
 package com.sunilkumarl.springai.service;
 
+import com.sunilkumarl.springai.model.Customer;
 import com.sunilkumarl.springai.model.Order;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -31,6 +32,20 @@ public class OrderService {
     public List<Order> findOrdersByCustomerId(Integer customer_id) {
         return restClient.get()
                 .uri("/orders?customer_id={customer_id}", customer_id)
+                .retrieve()
+                .body(new ParameterizedTypeReference<List<Order>>() {});
+    }
+
+    public List<Order> findOrdersByOrderId(Integer order_id) {
+        return restClient.get()
+                .uri("/orders?order_id={order_id}", order_id)
+                .retrieve()
+                .body(new ParameterizedTypeReference<List<Order>>() {});
+    }
+
+    public List<Order> findOrdersByAttributeNameAndValue(String orderAttributeName, String orderAttributeValue) {
+        return restClient.get()
+                .uri("/orders?{orderAttributeName}={orderAttributeValue}", orderAttributeName, orderAttributeValue)
                 .retrieve()
                 .body(new ParameterizedTypeReference<List<Order>>() {});
     }
