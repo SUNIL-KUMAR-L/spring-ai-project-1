@@ -19,7 +19,7 @@ public class LC4JCustomerTools {
         this.customerService = customerService;
     }
 
-   // @Tool("Fetch Customers data given the customer attribute name and customer attribute value")
+    @Tool("Fetch Customers data given the customer attribute name and customer attribute value")
     public Customer findCustomersByAttributeNameAndValue(String customerAttributeName, String customerAttributeValue) {
         System.out.println("Tool (findCustomersByKeyAndValue) : ARGUMENTS customer lookup by key : " + customerAttributeName + " and value : " + customerAttributeValue);
         if(!LOOK_UP_ALLOWED_CUSTOMER_ATTRIBUTES_.contains(customerAttributeName)) {

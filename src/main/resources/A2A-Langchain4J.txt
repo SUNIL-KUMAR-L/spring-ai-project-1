@@ -1,0 +1,844 @@
+A2A
+GET http://localhost:8080/superagent/api/v1/lc4j/llm
+GET http://localhost:8080/superagent/api/v1/lc4j/llm?question=`customer_name` is `Alice Johnson`, get the Orders purchased by this customer
+
+response :
+```json
+[
+  {
+    "order_id": 1001,
+    "order_datetime": "2025-11-01T10:15:00",
+    "customer_id": 1,
+    "order_total": 125.99,
+    "order_lines": [
+      {
+        "order_id": 1001,
+        "order_line_id": 1,
+        "order_line_seq_id": 1,
+        "product_id": 1,
+        "product_price": 25.99,
+        "product_qty": 2
+      },
+      {
+        "order_id": 1001,
+        "order_line_id": 2,
+        "order_line_seq_id": 2,
+        "product_id": 2,
+        "product_price": 75.5,
+        "product_qty": 1
+      }
+    ]
+  },
+  {
+    "order_id": 1002,
+    "order_datetime": "2025-11-02T14:20:00",
+    "customer_id": 1,
+    "order_total": 699.99,
+    "order_lines": [
+      {
+        "order_id": 1002,
+        "order_line_id": 1,
+        "order_line_seq_id": 1,
+        "product_id": 4,
+        "product_price": 699.99,
+        "product_qty": 1
+      }
+    ]
+  },
+  {
+    "order_id": 1021,
+    "order_datetime": "2025-11-12T09:30:00",
+    "customer_id": 1,
+    "order_total": 60,
+    "order_lines": [
+      {
+        "order_id": 1021,
+        "order_line_id": 1,
+        "order_line_seq_id": 1,
+        "product_id": 3,
+        "product_price": 60,
+        "product_qty": 1
+      }
+    ]
+  },
+  {
+    "order_id": 1031,
+    "order_datetime": "2025-11-17T09:10:00",
+    "customer_id": 1,
+    "order_total": 75.5,
+    "order_lines": [
+      {
+        "order_id": 1031,
+        "order_line_id": 1,
+        "order_line_seq_id": 1,
+        "product_id": 2,
+        "product_price": 75.5,
+        "product_qty": 1
+      }
+    ]
+  },
+  {
+    "order_id": 1041,
+    "order_datetime": "2025-11-22T09:15:00",
+    "customer_id": 1,
+    "order_total": 99.99,
+    "order_lines": [
+      {
+        "order_id": 1041,
+        "order_line_id": 1,
+        "order_line_seq_id": 1,
+        "product_id": 8,
+        "product_price": 99.99,
+        "product_qty": 1
+      }
+    ]
+  }
+]
+```
+
+
+Application logs
+
+C:\my_apps\openjdk-22\jdk-22.0.1\bin\java.exe "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2024.1.4\lib\idea_rt.jar=58893:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2024.1.4\bin" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\sunil\my_apps\springai\target\classes;C:\Users\sunil\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.5.8\spring-boot-starter-web-3.5.8.jar;C:\Users\sunil\.m2\repository\org\springframework\boot\spring-boot-starter\3.5.8\spring-boot-starter-3.5.8.jar;C:\Users\sunil\.m2\repository\org\springframework\boot\spring-boot\3.5.8\spring-boot-3.5.8.jar;C:\Users\sunil\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.5.8\spring-boot-autoconfigure-3.5.8.jar;C:\Users\sunil\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.5.8\spring-boot-starter-logging-3.5.8.jar;C:\Users\sunil\.m2\repository\ch\qos\logback\logback-classic\1.5.21\logback-classic-1.5.21.jar;C:\Users\sunil\.m2\repository\ch\qos\logback\logback-core\1.5.21\logback-core-1.5.21.jar;C:\Users\sunil\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\sunil\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\sunil\.m2\repository\org\slf4j\jul-to-slf4j\2.0.17\jul-to-slf4j-2.0.17.jar;C:\Users\sunil\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\sunil\.m2\repository\org\yaml\snakeyaml\2.4\snakeyaml-2.4.jar;C:\Users\sunil\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.5.8\spring-boot-starter-json-3.5.8.jar;C:\Users\sunil\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.19.4\jackson-datatype-jdk8-2.19.4.jar;C:\Users\sunil\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.19.4\jackson-datatype-jsr310-2.19.4.jar;C:\Users\sunil\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.19.4\jackson-module-parameter-names-2.19.4.jar;C:\Users\sunil\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.5.8\spring-boot-starter-tomcat-3.5.8.jar;C:\Users\sunil\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.49\tomcat-embed-core-10.1.49.jar;C:\Users\sunil\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.49\tomcat-embed-el-10.1.49.jar;C:\Users\sunil\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.49\tomcat-embed-websocket-10.1.49.jar;C:\Users\sunil\.m2\repository\org\springframework\spring-web\6.2.14\spring-web-6.2.14.jar;C:\Users\sunil\.m2\repository\org\springframework\spring-beans\6.2.14\spring-beans-6.2.14.jar;C:\Users\sunil\.m2\repository\io\micrometer\micrometer-observation\1.15.6\micrometer-observation-1.15.6.jar;C:\Users\sunil\.m2\repository\io\micrometer\micrometer-commons\1.15.6\micrometer-commons-1.15.6.jar;C:\Users\sunil\.m2\repository\org\springframework\spring-webmvc\6.2.14\spring-webmvc-6.2.14.jar;C:\Users\sunil\.m2\repository\org\springframework\spring-aop\6.2.14\spring-aop-6.2.14.jar;C:\Users\sunil\.m2\repository\org\springframework\spring-context\6.2.14\spring-context-6.2.14.jar;C:\Users\sunil\.m2\repository\org\springframework\spring-expression\6.2.14\spring-expression-6.2.14.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-starter-model-ollama\1.1.0\spring-ai-starter-model-ollama-1.1.0.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-autoconfigure-model-ollama\1.1.0\spring-ai-autoconfigure-model-ollama-1.1.0.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-autoconfigure-retry\1.1.0\spring-ai-autoconfigure-retry-1.1.0.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-autoconfigure-model-tool\1.1.0\spring-ai-autoconfigure-model-tool-1.1.0.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-autoconfigure-model-chat-observation\1.1.0\spring-ai-autoconfigure-model-chat-observation-1.1.0.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-autoconfigure-model-embedding-observation\1.1.0\spring-ai-autoconfigure-model-embedding-observation-1.1.0.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-ollama\1.1.0\spring-ai-ollama-1.1.0.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-model\1.1.0\spring-ai-model-1.1.0.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-commons\1.1.0\spring-ai-commons-1.1.0.jar;C:\Users\sunil\.m2\repository\io\micrometer\micrometer-core\1.15.6\micrometer-core-1.15.6.jar;C:\Users\sunil\.m2\repository\org\hdrhistogram\HdrHistogram\2.2.2\HdrHistogram-2.2.2.jar;C:\Users\sunil\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\sunil\.m2\repository\io\micrometer\context-propagation\1.1.3\context-propagation-1.1.3.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-template-st\1.1.0\spring-ai-template-st-1.1.0.jar;C:\Users\sunil\.m2\repository\org\antlr\ST4\4.3.4\ST4-4.3.4.jar;C:\Users\sunil\.m2\repository\org\antlr\antlr-runtime\3.5.3\antlr-runtime-3.5.3.jar;C:\Users\sunil\.m2\repository\org\springframework\spring-messaging\6.2.14\spring-messaging-6.2.14.jar;C:\Users\sunil\.m2\repository\io\projectreactor\reactor-core\3.7.13\reactor-core-3.7.13.jar;C:\Users\sunil\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\sunil\.m2\repository\org\antlr\antlr4-runtime\4.13.1\antlr4-runtime-4.13.1.jar;C:\Users\sunil\.m2\repository\com\github\victools\jsonschema-generator\4.38.0\jsonschema-generator-4.38.0.jar;C:\Users\sunil\.m2\repository\com\fasterxml\classmate\1.7.1\classmate-1.7.1.jar;C:\Users\sunil\.m2\repository\com\github\victools\jsonschema-module-jackson\4.38.0\jsonschema-module-jackson-4.38.0.jar;C:\Users\sunil\.m2\repository\com\github\victools\jsonschema-module-swagger-2\4.38.0\jsonschema-module-swagger-2-4.38.0.jar;C:\Users\sunil\.m2\repository\io\swagger\core\v3\swagger-annotations-jakarta\2.2.30\swagger-annotations-jakarta-2.2.30.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-retry\1.1.0\spring-ai-retry-1.1.0.jar;C:\Users\sunil\.m2\repository\org\springframework\retry\spring-retry\2.0.12\spring-retry-2.0.12.jar;C:\Users\sunil\.m2\repository\org\springframework\spring-webflux\6.2.14\spring-webflux-6.2.14.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-autoconfigure-model-chat-client\1.1.0\spring-ai-autoconfigure-model-chat-client-1.1.0.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-client-chat\1.1.0\spring-ai-client-chat-1.1.0.jar;C:\Users\sunil\.m2\repository\io\modelcontextprotocol\sdk\mcp-json-jackson2\0.16.0\mcp-json-jackson2-0.16.0.jar;C:\Users\sunil\.m2\repository\io\modelcontextprotocol\sdk\mcp-json\0.16.0\mcp-json-0.16.0.jar;C:\Users\sunil\.m2\repository\com\networknt\json-schema-validator\2.0.0\json-schema-validator-2.0.0.jar;C:\Users\sunil\.m2\repository\com\ethlo\time\itu\1.14.0\itu-1.14.0.jar;C:\Users\sunil\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.19.4\jackson-dataformat-yaml-2.19.4.jar;C:\Users\sunil\.m2\repository\com\fasterxml\jackson\module\jackson-module-jsonSchema\2.19.4\jackson-module-jsonSchema-2.19.4.jar;C:\Users\sunil\.m2\repository\javax\validation\validation-api\1.1.0.Final\validation-api-1.1.0.Final.jar;C:\Users\sunil\.m2\repository\com\knuddels\jtokkit\1.1.0\jtokkit-1.1.0.jar;C:\Users\sunil\.m2\repository\org\springframework\ai\spring-ai-autoconfigure-model-chat-memory\1.1.0\spring-ai-autoconfigure-model-chat-memory-1.1.0.jar;C:\Users\sunil\.m2\repository\dev\langchain4j\langchain4j\1.9.1\langchain4j-1.9.1.jar;C:\Users\sunil\.m2\repository\dev\langchain4j\langchain4j-core\1.9.1\langchain4j-core-1.9.1.jar;C:\Users\sunil\.m2\repository\org\jspecify\jspecify\1.0.0\jspecify-1.0.0.jar;C:\Users\sunil\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.19.4\jackson-annotations-2.19.4.jar;C:\Users\sunil\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.19.4\jackson-core-2.19.4.jar;C:\Users\sunil\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.19.4\jackson-databind-2.19.4.jar;C:\Users\sunil\.m2\repository\org\apache\opennlp\opennlp-tools\2.5.4\opennlp-tools-2.5.4.jar;C:\Users\sunil\.m2\repository\org\slf4j\slf4j-api\2.0.17\slf4j-api-2.0.17.jar;C:\Users\sunil\.m2\repository\dev\langchain4j\langchain4j-ollama\1.9.1\langchain4j-ollama-1.9.1.jar;C:\Users\sunil\.m2\repository\dev\langchain4j\langchain4j-http-client\1.9.1\langchain4j-http-client-1.9.1.jar;C:\Users\sunil\.m2\repository\dev\langchain4j\langchain4j-http-client-jdk\1.9.1\langchain4j-http-client-jdk-1.9.1.jar;C:\Users\sunil\.m2\repository\dev\langchain4j\langchain4j-agentic\1.9.1-beta17\langchain4j-agentic-1.9.1-beta17.jar;C:\Users\sunil\.m2\repository\dev\langchain4j\langchain4j-embeddings-bge-small-en-v15-q\1.9.1-beta17\langchain4j-embeddings-bge-small-en-v15-q-1.9.1-beta17.jar;C:\Users\sunil\.m2\repository\dev\langchain4j\langchain4j-embeddings\1.9.1-beta17\langchain4j-embeddings-1.9.1-beta17.jar;C:\Users\sunil\.m2\repository\com\microsoft\onnxruntime\onnxruntime\1.20.0\onnxruntime-1.20.0.jar;C:\Users\sunil\.m2\repository\ai\djl\api\0.31.1\api-0.31.1.jar;C:\Users\sunil\.m2\repository\com\google\code\gson\gson\2.13.2\gson-2.13.2.jar;C:\Users\sunil\.m2\repository\com\google\errorprone\error_prone_annotations\2.41.0\error_prone_annotations-2.41.0.jar;C:\Users\sunil\.m2\repository\net\java\dev\jna\jna\5.14.0\jna-5.14.0.jar;C:\Users\sunil\.m2\repository\org\apache\commons\commons-compress\1.27.1\commons-compress-1.27.1.jar;C:\Users\sunil\.m2\repository\commons-codec\commons-codec\1.18.0\commons-codec-1.18.0.jar;C:\Users\sunil\.m2\repository\commons-io\commons-io\2.16.1\commons-io-2.16.1.jar;C:\Users\sunil\.m2\repository\ai\djl\huggingface\tokenizers\0.31.1\tokenizers-0.31.1.jar;C:\Users\sunil\.m2\repository\org\projectlombok\lombok\1.18.42\lombok-1.18.42.jar;C:\Users\sunil\.m2\repository\org\springframework\spring-core\6.2.14\spring-core-6.2.14.jar;C:\Users\sunil\.m2\repository\org\springframework\spring-jcl\6.2.14\spring-jcl-6.2.14.jar com.sunilkumarl.springai.SpringaiApplication
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.8)
+
+2025-12-21T11:14:12.756-06:00  INFO 19380 --- [springai] [           main] c.s.springai.SpringaiApplication         : Starting SpringaiApplication using Java 22.0.1 with PID 19380 (C:\Users\sunil\my_apps\springai\target\classes started by sunil in C:\Users\sunil\my_apps\springai)
+2025-12-21T11:14:12.765-06:00  INFO 19380 --- [springai] [           main] c.s.springai.SpringaiApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-12-21T11:14:13.890-06:00  INFO 19380 --- [springai] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-12-21T11:14:13.899-06:00  INFO 19380 --- [springai] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-21T11:14:13.899-06:00  INFO 19380 --- [springai] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.49]
+2025-12-21T11:14:13.940-06:00  INFO 19380 --- [springai] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-21T11:14:13.940-06:00  INFO 19380 --- [springai] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1115 ms
+2025-12-21T11:14:14.321-06:00 DEBUG 19380 --- [springai] [           main] o.s.a.m.t.a.ToolCallingAutoConfiguration : Cannot load class: org.springframework.security.oauth2.client.ClientAuthorizationException
+2025-12-21T11:14:14.651-06:00  INFO 19380 --- [springai] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-12-21T11:14:14.658-06:00  INFO 19380 --- [springai] [           main] c.s.springai.SpringaiApplication         : Started SpringaiApplication in 2.387 seconds (process running for 2.675)
+2025-12-21T11:14:38.740-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-21T11:14:38.741-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-21T11:14:38.741-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+Lc4JSupervisorController - getLLMResponse() : Received question :
+`customer_name` is `Alice Johnson`, get the Orders purchased by this customer
+2025-12-21T11:14:38.839-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "You are a planner expert that is provided with a set of agents.\nYou know nothing about any domain, don't take any assumptions about the user request,\nthe only thing that you can do is rely on the provided agents.\n\nYour role is to analyze the user request and decide which one of the provided agents to call next to address it.\nYou return an agent invocation consisting of the name of the agent and the arguments to pass to it.\n\nIf no further agent requests are required, return an agentName of \"done\" and an argument named\n\"response\", where the value of the response argument is a recap of all the performed actions,\nwritten in the same language as the user request.\n\nAgents are provided with their name and description together with a list of applicable arguments\nin the format {'name', 'description', [argument1: type1, argument2: type2]}.\n\nDecide which agent to invoke next, doing things in small steps and\nnever taking any shortcuts or relying on your own knowledge.\nEven if the user's request is already clear or explicit, don't make any assumptions and use the agents.\nBe sure to query ALL necessary agents.\n\nThe comma separated list of available agents is: '{'CustomersAgent_CustomersAgent', 'This agent helps to find customer data', [UserMessage: String]}, {'OrdersAgent_OrdersAgent', 'This agent helps to find Orders data', [UserMessage: String]}'.\n\nUse the following supervisor context to better understand constraints, policies or preferences when creating the plan 'Always use available subAgents configured. if any Specific Customer's Order data to be fetched from `OrdersAgent` then first get the customer_id from Customer's data using `CustomersAgent`, Always answer in English. When invoking agent, use pure JSON (no backticks, and new lines as backslash+n).'.\n"
+  }, {
+    "role" : "user",
+    "content" : "The user request is: '`customer_name` is `Alice Johnson`, get the Orders purchased by this customer'.\nThe last received response is: ''.\n\nYou must answer strictly in the following JSON format: {\n\"agentName\": (type: string),\n\"arguments\": (type: java.util.Map)\n}"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ ]
+}
+
+2025-12-21T11:15:31.608-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP response:
+- status code: 200
+- headers: [content-length: 2023], [content-type: application/json; charset=utf-8], [date: Sun, 21 Dec 2025 17:15:31 GMT]
+- body: {"model":"gpt-oss:20b","created_at":"2025-12-21T17:15:31.5835505Z","message":{"role":"assistant","content":"{\"agentName\":\"CustomersAgent_CustomersAgent\",\"arguments\":{\"UserMessage\":\"Alice Johnson\"}}","thinking":"We need to follow the instructions. We have user request: customer_name is Alice Johnson, get the Orders purchased by this customer. We have to first get customer_id using CustomersAgent_CustomersAgent, passing UserMessage: presumably a string \"Alice Johnson\" or \"Find customer data for Alice Johnson\"? The agent description: 'This agent helps to find customer data', [UserMessage: String]. So we should invoke CustomersAgent_CustomersAgent with UserMessage: \"Alice Johnson\" or maybe a request that includes that. Then once we get the customer_id from the result, we use OrdersAgent_OrdersAgent with UserMessage: probably some query with customer_id. But the instructions: \"Always use available subAgents configured. if any Specific Customer's Order data to be fetched from `OrdersAgent` then first get the customer_id from Customer's data using `CustomersAgent`\". So first agent: CustomersAgent_CustomersAgent with UserMessage: \"Alice Johnson\" (or \"Find customer data for Alice Johnson\"). We'll produce an invocation with name and arguments. We need to respond in JSON. No backticks, no newlines as \\n. Use pure JSON.\n\nThus we will output something like:\n{\n  \"agentName\": \"CustomersAgent_CustomersAgent\",\n  \"arguments\": {\n    \"UserMessage\": \"Alice Johnson\"\n  }\n}\n\nBut maybe we need to specify more? The agent expects a single argument UserMessage: String. The message likely should be \"Alice Johnson\" or maybe \"Get customer data for Alice Johnson\". The instructions: \"This agent helps to find customer data\". So we can just pass \"Alice Johnson\". So the output JSON."},"done":true,"done_reason":"stop","total_duration":52701351300,"load_duration":617711700,"prompt_eval_count":503,"prompt_eval_duration":11953493800,"eval_count":363,"eval_duration":40032367700}
+
+2025-12-21T11:15:31.690-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.a.supervisor.SupervisorPlanner       : Agent Invocation: AgentInvocation{agentName='CustomersAgent_CustomersAgent', arguments={UserMessage=Alice Johnson}}
+2025-12-21T11:15:31.703-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "Fetch customer data as per the user request.\nUse the right tool to fetch a customer data\notherwise Use Fetch all customers data\nIMPORTANT: Return your response as valid JSON only, new lines as \\n, without any markdown formatting or code blocks.\n"
+  }, {
+    "role" : "user",
+    "content" : "Alice Johnson\n"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ {
+    "type" : "function",
+    "function" : {
+      "name" : "findAllCustomers",
+      "description" : "Fetch All Customers data"
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "findByCustomerName",
+      "description" : "Fetch Customer data By Customer's Name",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_name" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "customer_name" ]
+      }
+    }
+  } ]
+}
+
+2025-12-21T11:15:42.120-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP response:
+- status code: 200
+- headers: [content-length: 551], [content-type: application/json; charset=utf-8], [date: Sun, 21 Dec 2025 17:15:42 GMT]
+- body: {"model":"gpt-oss:20b","created_at":"2025-12-21T17:15:42.1178537Z","message":{"role":"assistant","content":"","thinking":"We have to use function findByCustomerName because user provided a name. We need to call the function.","tool_calls":[{"id":"call_b4z6jfbt","function":{"index":0,"name":"findByCustomerName","arguments":{"customer_name":"Alice Johnson"}}}]},"done":true,"done_reason":"stop","total_duration":10412104000,"load_duration":409554400,"prompt_eval_count":196,"prompt_eval_duration":4402208000,"eval_count":50,"eval_duration":5582643500}
+
+Tool (findByCustomerName)
+findByCustomerName :: customer data [0] :
+Customer[customer_id=1, customer_name=Alice Johnson, email=alice.johnson@example.com, phone_number=9876543210]
+2025-12-21T11:15:42.228-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "Fetch customer data as per the user request.\nUse the right tool to fetch a customer data\notherwise Use Fetch all customers data\nIMPORTANT: Return your response as valid JSON only, new lines as \\n, without any markdown formatting or code blocks.\n"
+  }, {
+    "role" : "user",
+    "content" : "Alice Johnson\n"
+  }, {
+    "role" : "assistant",
+    "tool_calls" : [ {
+      "function" : {
+        "name" : "findByCustomerName",
+        "arguments" : {
+          "customer_name" : "Alice Johnson"
+        }
+      }
+    } ]
+  }, {
+    "role" : "tool",
+    "content" : "{\r\n  \"customer_id\" : 1,\r\n  \"customer_name\" : \"Alice Johnson\",\r\n  \"email\" : \"alice.johnson@example.com\",\r\n  \"phone_number\" : \"9876543210\"\r\n}"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ {
+    "type" : "function",
+    "function" : {
+      "name" : "findAllCustomers",
+      "description" : "Fetch All Customers data"
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "findByCustomerName",
+      "description" : "Fetch Customer data By Customer's Name",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_name" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "customer_name" ]
+      }
+    }
+  } ]
+}
+
+2025-12-21T11:16:42.248-06:00  WARN 19380 --- [springai] [nio-8080-exec-1] dev.langchain4j.internal.RetryUtils      : A retriable exception occurred. Remaining retries: 2 of 2
+
+dev.langchain4j.exception.TimeoutException: request timed out
+	at dev.langchain4j.http.client.jdk.JdkHttpClient.execute(JdkHttpClient.java:58) ~[langchain4j-http-client-jdk-1.9.1.jar:na]
+	at dev.langchain4j.http.client.log.LoggingHttpClient.execute(LoggingHttpClient.java:49) ~[langchain4j-http-client-1.9.1.jar:na]
+	at dev.langchain4j.model.ollama.OllamaClient.chat(OllamaClient.java:106) ~[langchain4j-ollama-1.9.1.jar:na]
+	at dev.langchain4j.model.ollama.OllamaChatModel.lambda$doChat$0(OllamaChatModel.java:41) ~[langchain4j-ollama-1.9.1.jar:na]
+	at dev.langchain4j.internal.ExceptionMapper.withExceptionMapper(ExceptionMapper.java:29) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.internal.RetryUtils.lambda$withRetryMappingExceptions$1(RetryUtils.java:322) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.internal.RetryUtils$RetryPolicy.withRetry(RetryUtils.java:204) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.internal.RetryUtils.withRetry(RetryUtils.java:259) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:322) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:305) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.model.ollama.OllamaChatModel.doChat(OllamaChatModel.java:41) ~[langchain4j-ollama-1.9.1.jar:na]
+	at dev.langchain4j.model.chat.ChatModel.chat(ChatModel.java:46) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.service.tool.ToolService.executeInferenceAndToolsLoop(ToolService.java:308) ~[langchain4j-1.9.1.jar:na]
+	at dev.langchain4j.service.DefaultAiServices$1.invoke(DefaultAiServices.java:392) ~[langchain4j-1.9.1.jar:na]
+	at dev.langchain4j.service.DefaultAiServices$1.invoke(DefaultAiServices.java:236) ~[langchain4j-1.9.1.jar:na]
+	at jdk.proxy2/jdk.proxy2.$Proxy67.ask(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at dev.langchain4j.agentic.agent.AgentInvocationHandler.invoke(AgentInvocationHandler.java:116) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at jdk.proxy2/jdk.proxy2.$Proxy68.ask(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at dev.langchain4j.agentic.internal.AgentInvoker.internalInvoke(AgentInvoker.java:52) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.AgentInvoker.invoke(AgentInvoker.java:40) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.AgentExecutor.internalExecute(AgentExecutor.java:56) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.AgentExecutor.execute(AgentExecutor.java:32) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.AgentExecutor.execute(AgentExecutor.java:20) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.PlannerBasedInvocationHandler$PlannerLoop.loop(PlannerBasedInvocationHandler.java:221) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.PlannerBasedInvocationHandler.executeAgentMethod(PlannerBasedInvocationHandler.java:187) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.PlannerBasedInvocationHandler.invoke(PlannerBasedInvocationHandler.java:166) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at jdk.proxy2/jdk.proxy2.$Proxy71.invoke(Unknown Source) ~[na:na]
+	at com.sunilkumarl.springai.controller.lc4j.Lc4JSupervisorController.getLLMResponse(Lc4JSupervisorController.java:79) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.49.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.49.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at java.base/java.lang.Thread.run(Thread.java:1570) ~[na:na]
+Caused by: java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:954) ~[java.net.http:na]
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133) ~[java.net.http:na]
+	at dev.langchain4j.http.client.jdk.JdkHttpClient.execute(JdkHttpClient.java:50) ~[langchain4j-http-client-jdk-1.9.1.jar:na]
+	... 79 common frames omitted
+
+2025-12-21T11:16:42.825-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "Fetch customer data as per the user request.\nUse the right tool to fetch a customer data\notherwise Use Fetch all customers data\nIMPORTANT: Return your response as valid JSON only, new lines as \\n, without any markdown formatting or code blocks.\n"
+  }, {
+    "role" : "user",
+    "content" : "Alice Johnson\n"
+  }, {
+    "role" : "assistant",
+    "tool_calls" : [ {
+      "function" : {
+        "name" : "findByCustomerName",
+        "arguments" : {
+          "customer_name" : "Alice Johnson"
+        }
+      }
+    } ]
+  }, {
+    "role" : "tool",
+    "content" : "{\r\n  \"customer_id\" : 1,\r\n  \"customer_name\" : \"Alice Johnson\",\r\n  \"email\" : \"alice.johnson@example.com\",\r\n  \"phone_number\" : \"9876543210\"\r\n}"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ {
+    "type" : "function",
+    "function" : {
+      "name" : "findAllCustomers",
+      "description" : "Fetch All Customers data"
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "findByCustomerName",
+      "description" : "Fetch Customer data By Customer's Name",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_name" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "customer_name" ]
+      }
+    }
+  } ]
+}
+
+2025-12-21T11:17:24.159-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP response:
+- status code: 200
+- headers: [content-length: 1916], [content-type: application/json; charset=utf-8], [date: Sun, 21 Dec 2025 17:17:24 GMT]
+- body: {"model":"gpt-oss:20b","created_at":"2025-12-21T17:17:24.1563025Z","message":{"role":"assistant","content":"{\"customer_id\":1,\"customer_name\":\"Alice Johnson\",\"email\":\"alice.johnson@example.com\",\"phone_number\":\"9876543210\"}","thinking":"We need to return valid JSON, new lines as \\n, no markdown. The response above is JSON but contains newlines? Actually it's in multiple lines, but the instruction: \"Return your response as valid JSON only, new lines as \\n, without any markdown formatting or code blocks.\" That means the output should be a single line JSON string with \\n where new lines were originally. The assistant responded with JSON on multiple lines. That might violate the instruction. We need to format it with \\n escape sequences. Let's produce a single string? We should output something like:\n\n{\n  \"customer_id\": 1,\n  \"customer_name\": \"Alice Johnson\",\n  \"email\": \"alice.johnson@example.com\",\n  \"phone_number\": \"9876543210\"\n}\n\nBut with \\n in place of actual newlines. We must provide valid JSON. So the output should be a JSON object. The newlines should be represented as \\n in the string? Wait, the instruction: \"new lines as \\n\". That suggests that we should replace actual newline characters with the literal string \\n. So the JSON output should be something like:\n\n{\"customer_id\":1,\"customer_name\":\"Alice Johnson\",\"email\":\"alice.johnson@example.com\",\"phone_number\":\"9876543210\"}\n\nNo newlines needed. But if we want to preserve formatting with newlines, we need to use \\n. But simpler is to output one line JSON. That is valid JSON and no newlines. That satisfies the requirement. So just output the JSON object as one line. Let's do that."},"done":true,"done_reason":"stop","total_duration":41326365800,"load_duration":426602600,"prompt_eval_count":274,"prompt_eval_duration":168714500,"eval_count":363,"eval_duration":40615489300}
+
+2025-12-21T11:17:24.171-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "user",
+    "content" : "Create a short summary of the following conversation between one or more AI agents and a user.\nMention all the agents involved in the conversation.\nDo not provide any additional information, just the summary.\nThe user conversation is: 'User: \"Alice Johnson\n\"\nCustomersAgent agent: \"{\"customer_id\":1,\"customer_name\":\"Alice Johnson\",\"email\":\"alice.johnson@example.com\",\"phone_number\":\"9876543210\"}\"\n'.\n\nYou must answer strictly in the following JSON format: {\n\"summary\": (type: string)\n}"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ ]
+}
+
+2025-12-21T11:17:43.074-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP response:
+- status code: 200
+- headers: [content-length: 941], [content-type: application/json; charset=utf-8], [date: Sun, 21 Dec 2025 17:17:43 GMT]
+- body: {"model":"gpt-oss:20b","created_at":"2025-12-21T17:17:43.0723496Z","message":{"role":"assistant","content":"{\"summary\":\"The user supplied the name \\\"Alice Johnson\\\" and the CustomersAgent responded with the corresponding customer record in JSON format.\"}","thinking":"We have a user conversation: 'User: \"Alice Johnson\n\" CustomersAgent agent: \"{\"customer_id\":1,\"customer_name\":\"Alice Johnson\",\"email\":\"alice.johnson@example.com\",\"phone_number\":\"9876543210\"}\"'. The user says \"Alice Johnson\". Then the agent responded with JSON data. The summary: The user provided a customer name, the agent returned the customer record. Agents involved: CustomersAgent. We need JSON with key \"summary\". Ensure string. Let's produce."},"done":true,"done_reason":"stop","total_duration":18896362300,"load_duration":585917300,"prompt_eval_count":174,"prompt_eval_duration":3529431400,"eval_count":139,"eval_duration":14752247900}
+
+2025-12-21T11:17:43.078-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "You are a planner expert that is provided with a set of agents.\nYou know nothing about any domain, don't take any assumptions about the user request,\nthe only thing that you can do is rely on the provided agents.\n\nYour role is to analyze the user request and decide which one of the provided agents to call next to address it.\nYou return an agent invocation consisting of the name of the agent and the arguments to pass to it.\n\nIf no further agent requests are required, return an agentName of \"done\" and an argument named\n\"response\", where the value of the response argument is a recap of all the performed actions,\nwritten in the same language as the user request.\n\nAgents are provided with their name and description together with a list of applicable arguments\nin the format {'name', 'description', [argument1: type1, argument2: type2]}.\n\nDecide which agent to invoke next, doing things in small steps and\nnever taking any shortcuts or relying on your own knowledge.\nEven if the user's request is already clear or explicit, don't make any assumptions and use the agents.\nBe sure to query ALL necessary agents.\n\nThe comma separated list of available agents is: '{'CustomersAgent_CustomersAgent', 'This agent helps to find customer data', [UserMessage: String]}, {'OrdersAgent_OrdersAgent', 'This agent helps to find Orders data', [UserMessage: String]}'.\n\nUse the following supervisor context to better understand constraints, policies or preferences when creating the plan 'Always use available subAgents configured. if any Specific Customer's Order data to be fetched from `OrdersAgent` then first get the customer_id from Customer's data using `CustomersAgent`, Always answer in English. When invoking agent, use pure JSON (no backticks, and new lines as backslash+n).'.\n"
+  }, {
+    "role" : "user",
+    "content" : "The user request is: '`customer_name` is `Alice Johnson`, get the Orders purchased by this customer'.\nThe last received response is: ''.\n\nYou must answer strictly in the following JSON format: {\n\"agentName\": (type: string),\n\"arguments\": (type: java.util.Map)\n}"
+  }, {
+    "role" : "assistant",
+    "content" : "{\"agentName\":\"CustomersAgent_CustomersAgent\",\"arguments\":{\"UserMessage\":\"Alice Johnson\"}}",
+    "tool_calls" : [ ]
+  }, {
+    "role" : "user",
+    "content" : "Considering this context \"The user supplied the name \"Alice Johnson\" and the CustomersAgent responded with the corresponding customer record in JSON format.\"\nThe user request is: '`customer_name` is `Alice Johnson`, get the Orders purchased by this customer'.\nThe last received response is: '{\"customer_id\":1,\"customer_name\":\"Alice Johnson\",\"email\":\"alice.johnson@example.com\",\"phone_number\":\"9876543210\"}'.\n\nYou must answer strictly in the following JSON format: {\n\"agentName\": (type: string),\n\"arguments\": (type: java.util.Map)\n}"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ ]
+}
+
+2025-12-21T11:18:13.643-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP response:
+- status code: 200
+- headers: [content-length: 795], [content-type: application/json; charset=utf-8], [date: Sun, 21 Dec 2025 17:18:13 GMT]
+- body: {"model":"gpt-oss:20b","created_at":"2025-12-21T17:18:13.6416293Z","message":{"role":"assistant","content":"{\"agentName\":\"OrdersAgent_OrdersAgent\",\"arguments\":{\"UserMessage\":\"customer_id=1\"}}","thinking":"We have customer_id=1. Need to fetch orders for this customer via OrdersAgent. So invoke OrdersAgent with UserMessage likely containing customer_id or maybe just use the name? The description: OrdersAgent helps find Orders data, takes UserMessage. So we should pass a message with customer_id 1. Likely a string like \"customer_id=1\". So arguments: {\"UserMessage\":\"customer_id=1\"}"},"done":true,"done_reason":"stop","total_duration":30559987900,"load_duration":607198900,"prompt_eval_count":647,"prompt_eval_duration":17564526100,"eval_count":115,"eval_duration":12299029900}
+
+2025-12-21T11:18:13.644-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.a.supervisor.SupervisorPlanner       : Agent Invocation: AgentInvocation{agentName='OrdersAgent_OrdersAgent', arguments={UserMessage=customer_id=1}}
+2025-12-21T11:18:13.646-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "Fetch Order data as per the user request.\nUse the right tool to fetch a order data\notherwise Use Fetch all orders data\nIMPORTANT: Return your response as valid JSON only, new lines as \\n, without any markdown formatting or code blocks.\n"
+  }, {
+    "role" : "user",
+    "content" : "customer_id=1\n"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ {
+    "type" : "function",
+    "function" : {
+      "name" : "findOrdersByCustomerId",
+      "description" : "Fetch Orders data by customer_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_id" : {
+            "type" : "integer"
+          }
+        },
+        "required" : [ "customer_id" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "findOrdersByOrderId",
+      "description" : "Fetch Orders data by order_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "order_id" : {
+            "type" : "integer"
+          }
+        },
+        "required" : [ "order_id" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "findAllOrders",
+      "description" : "Fetch All Orders data"
+    }
+  } ]
+}
+
+2025-12-21T11:18:24.931-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP response:
+- status code: 200
+- headers: [content-length: 560], [content-type: application/json; charset=utf-8], [date: Sun, 21 Dec 2025 17:18:24 GMT]
+- body: {"model":"gpt-oss:20b","created_at":"2025-12-21T17:18:24.9289126Z","message":{"role":"assistant","content":"","thinking":"The user wants order data for customer_id=1. We should use findOrdersByCustomerId. Then return JSON. Need to call function.","tool_calls":[{"id":"call_icimm8jx","function":{"index":0,"name":"findOrdersByCustomerId","arguments":{"customer_id":1}}}]},"done":true,"done_reason":"stop","total_duration":11278756900,"load_duration":557473200,"prompt_eval_count":225,"prompt_eval_duration":4883358600,"eval_count":57,"eval_duration":5788580000}
+
+Tool (findOrdersByCustomerId) by customer_id : 1
+findOrdersByCustomerId :: order data :
+[Order[order_id=1001, order_datetime=2025-11-01T10:15:00, customer_id=1, order_total=125.99, order_lines=[OrderLine[order_id=1001, order_line_id=1, order_line_seq_id=1, product_id=1, product_price=25.99, product_qty=2], OrderLine[order_id=1001, order_line_id=2, order_line_seq_id=2, product_id=2, product_price=75.5, product_qty=1]]], Order[order_id=1002, order_datetime=2025-11-02T14:20:00, customer_id=1, order_total=699.99, order_lines=[OrderLine[order_id=1002, order_line_id=1, order_line_seq_id=1, product_id=4, product_price=699.99, product_qty=1]]], Order[order_id=1021, order_datetime=2025-11-12T09:30:00, customer_id=1, order_total=60.0, order_lines=[OrderLine[order_id=1021, order_line_id=1, order_line_seq_id=1, product_id=3, product_price=60.0, product_qty=1]]], Order[order_id=1031, order_datetime=2025-11-17T09:10:00, customer_id=1, order_total=75.5, order_lines=[OrderLine[order_id=1031, order_line_id=1, order_line_seq_id=1, product_id=2, product_price=75.5, product_qty=1]]], Order[order_id=1041, order_datetime=2025-11-22T09:15:00, customer_id=1, order_total=99.99, order_lines=[OrderLine[order_id=1041, order_line_id=1, order_line_seq_id=1, product_id=8, product_price=99.99, product_qty=1]]]]
+2025-12-21T11:18:24.985-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "Fetch Order data as per the user request.\nUse the right tool to fetch a order data\notherwise Use Fetch all orders data\nIMPORTANT: Return your response as valid JSON only, new lines as \\n, without any markdown formatting or code blocks.\n"
+  }, {
+    "role" : "user",
+    "content" : "customer_id=1\n"
+  }, {
+    "role" : "assistant",
+    "tool_calls" : [ {
+      "function" : {
+        "name" : "findOrdersByCustomerId",
+        "arguments" : {
+          "customer_id" : 1
+        }
+      }
+    } ]
+  }, {
+    "role" : "tool",
+    "content" : "[ {\r\n  \"order_id\" : 1001,\r\n  \"order_datetime\" : \"2025-11-01T10:15:00\",\r\n  \"customer_id\" : 1,\r\n  \"order_total\" : 125.99,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1001,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 1,\r\n    \"product_price\" : 25.99,\r\n    \"product_qty\" : 2\r\n  }, {\r\n    \"order_id\" : 1001,\r\n    \"order_line_id\" : 2,\r\n    \"order_line_seq_id\" : 2,\r\n    \"product_id\" : 2,\r\n    \"product_price\" : 75.5,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1002,\r\n  \"order_datetime\" : \"2025-11-02T14:20:00\",\r\n  \"customer_id\" : 1,\r\n  \"order_total\" : 699.99,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1002,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 4,\r\n    \"product_price\" : 699.99,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1021,\r\n  \"order_datetime\" : \"2025-11-12T09:30:00\",\r\n  \"customer_id\" : 1,\r\n  \"order_total\" : 60.0,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1021,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 3,\r\n    \"product_price\" : 60.0,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1031,\r\n  \"order_datetime\" : \"2025-11-17T09:10:00\",\r\n  \"customer_id\" : 1,\r\n  \"order_total\" : 75.5,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1031,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 2,\r\n    \"product_price\" : 75.5,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1041,\r\n  \"order_datetime\" : \"2025-11-22T09:15:00\",\r\n  \"customer_id\" : 1,\r\n  \"order_total\" : 99.99,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1041,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 8,\r\n    \"product_price\" : 99.99,\r\n    \"product_qty\" : 1\r\n  } ]\r\n} ]"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ {
+    "type" : "function",
+    "function" : {
+      "name" : "findOrdersByCustomerId",
+      "description" : "Fetch Orders data by customer_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_id" : {
+            "type" : "integer"
+          }
+        },
+        "required" : [ "customer_id" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "findOrdersByOrderId",
+      "description" : "Fetch Orders data by order_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "order_id" : {
+            "type" : "integer"
+          }
+        },
+        "required" : [ "order_id" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "findAllOrders",
+      "description" : "Fetch All Orders data"
+    }
+  } ]
+}
+
+2025-12-21T11:19:25.003-06:00  WARN 19380 --- [springai] [nio-8080-exec-1] dev.langchain4j.internal.RetryUtils      : A retriable exception occurred. Remaining retries: 2 of 2
+
+dev.langchain4j.exception.TimeoutException: request timed out
+	at dev.langchain4j.http.client.jdk.JdkHttpClient.execute(JdkHttpClient.java:58) ~[langchain4j-http-client-jdk-1.9.1.jar:na]
+	at dev.langchain4j.http.client.log.LoggingHttpClient.execute(LoggingHttpClient.java:49) ~[langchain4j-http-client-1.9.1.jar:na]
+	at dev.langchain4j.model.ollama.OllamaClient.chat(OllamaClient.java:106) ~[langchain4j-ollama-1.9.1.jar:na]
+	at dev.langchain4j.model.ollama.OllamaChatModel.lambda$doChat$0(OllamaChatModel.java:41) ~[langchain4j-ollama-1.9.1.jar:na]
+	at dev.langchain4j.internal.ExceptionMapper.withExceptionMapper(ExceptionMapper.java:29) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.internal.RetryUtils.lambda$withRetryMappingExceptions$1(RetryUtils.java:322) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.internal.RetryUtils$RetryPolicy.withRetry(RetryUtils.java:204) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.internal.RetryUtils.withRetry(RetryUtils.java:259) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:322) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:305) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.model.ollama.OllamaChatModel.doChat(OllamaChatModel.java:41) ~[langchain4j-ollama-1.9.1.jar:na]
+	at dev.langchain4j.model.chat.ChatModel.chat(ChatModel.java:46) ~[langchain4j-core-1.9.1.jar:na]
+	at dev.langchain4j.service.tool.ToolService.executeInferenceAndToolsLoop(ToolService.java:308) ~[langchain4j-1.9.1.jar:na]
+	at dev.langchain4j.service.DefaultAiServices$1.invoke(DefaultAiServices.java:392) ~[langchain4j-1.9.1.jar:na]
+	at dev.langchain4j.service.DefaultAiServices$1.invoke(DefaultAiServices.java:236) ~[langchain4j-1.9.1.jar:na]
+	at jdk.proxy2/jdk.proxy2.$Proxy69.ask(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at dev.langchain4j.agentic.agent.AgentInvocationHandler.invoke(AgentInvocationHandler.java:116) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at jdk.proxy2/jdk.proxy2.$Proxy70.ask(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at dev.langchain4j.agentic.internal.AgentInvoker.internalInvoke(AgentInvoker.java:52) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.AgentInvoker.invoke(AgentInvoker.java:40) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.AgentExecutor.internalExecute(AgentExecutor.java:56) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.AgentExecutor.execute(AgentExecutor.java:32) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.AgentExecutor.execute(AgentExecutor.java:20) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.PlannerBasedInvocationHandler$PlannerLoop.loop(PlannerBasedInvocationHandler.java:221) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.PlannerBasedInvocationHandler.executeAgentMethod(PlannerBasedInvocationHandler.java:187) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at dev.langchain4j.agentic.internal.PlannerBasedInvocationHandler.invoke(PlannerBasedInvocationHandler.java:166) ~[langchain4j-agentic-1.9.1-beta17.jar:na]
+	at jdk.proxy2/jdk.proxy2.$Proxy71.invoke(Unknown Source) ~[na:na]
+	at com.sunilkumarl.springai.controller.lc4j.Lc4JSupervisorController.getLLMResponse(Lc4JSupervisorController.java:79) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.49.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.14.jar:6.2.14]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.49.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.14.jar:6.2.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.49.jar:10.1.49]
+	at java.base/java.lang.Thread.run(Thread.java:1570) ~[na:na]
+Caused by: java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:954) ~[java.net.http:na]
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133) ~[java.net.http:na]
+	at dev.langchain4j.http.client.jdk.JdkHttpClient.execute(JdkHttpClient.java:50) ~[langchain4j-http-client-jdk-1.9.1.jar:na]
+	... 79 common frames omitted
+
+2025-12-21T11:19:25.549-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "Fetch Order data as per the user request.\nUse the right tool to fetch a order data\notherwise Use Fetch all orders data\nIMPORTANT: Return your response as valid JSON only, new lines as \\n, without any markdown formatting or code blocks.\n"
+  }, {
+    "role" : "user",
+    "content" : "customer_id=1\n"
+  }, {
+    "role" : "assistant",
+    "tool_calls" : [ {
+      "function" : {
+        "name" : "findOrdersByCustomerId",
+        "arguments" : {
+          "customer_id" : 1
+        }
+      }
+    } ]
+  }, {
+    "role" : "tool",
+    "content" : "[ {\r\n  \"order_id\" : 1001,\r\n  \"order_datetime\" : \"2025-11-01T10:15:00\",\r\n  \"customer_id\" : 1,\r\n  \"order_total\" : 125.99,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1001,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 1,\r\n    \"product_price\" : 25.99,\r\n    \"product_qty\" : 2\r\n  }, {\r\n    \"order_id\" : 1001,\r\n    \"order_line_id\" : 2,\r\n    \"order_line_seq_id\" : 2,\r\n    \"product_id\" : 2,\r\n    \"product_price\" : 75.5,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1002,\r\n  \"order_datetime\" : \"2025-11-02T14:20:00\",\r\n  \"customer_id\" : 1,\r\n  \"order_total\" : 699.99,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1002,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 4,\r\n    \"product_price\" : 699.99,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1021,\r\n  \"order_datetime\" : \"2025-11-12T09:30:00\",\r\n  \"customer_id\" : 1,\r\n  \"order_total\" : 60.0,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1021,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 3,\r\n    \"product_price\" : 60.0,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1031,\r\n  \"order_datetime\" : \"2025-11-17T09:10:00\",\r\n  \"customer_id\" : 1,\r\n  \"order_total\" : 75.5,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1031,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 2,\r\n    \"product_price\" : 75.5,\r\n    \"product_qty\" : 1\r\n  } ]\r\n}, {\r\n  \"order_id\" : 1041,\r\n  \"order_datetime\" : \"2025-11-22T09:15:00\",\r\n  \"customer_id\" : 1,\r\n  \"order_total\" : 99.99,\r\n  \"order_lines\" : [ {\r\n    \"order_id\" : 1041,\r\n    \"order_line_id\" : 1,\r\n    \"order_line_seq_id\" : 1,\r\n    \"product_id\" : 8,\r\n    \"product_price\" : 99.99,\r\n    \"product_qty\" : 1\r\n  } ]\r\n} ]"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ {
+    "type" : "function",
+    "function" : {
+      "name" : "findOrdersByCustomerId",
+      "description" : "Fetch Orders data by customer_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "customer_id" : {
+            "type" : "integer"
+          }
+        },
+        "required" : [ "customer_id" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "findOrdersByOrderId",
+      "description" : "Fetch Orders data by order_id",
+      "parameters" : {
+        "type" : "object",
+        "properties" : {
+          "order_id" : {
+            "type" : "integer"
+          }
+        },
+        "required" : [ "order_id" ]
+      }
+    }
+  }, {
+    "type" : "function",
+    "function" : {
+      "name" : "findAllOrders",
+      "description" : "Fetch All Orders data"
+    }
+  } ]
+}
+
+2025-12-21T11:20:23.705-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP response:
+- status code: 200
+- headers: [content-type: application/json; charset=utf-8], [date: Sun, 21 Dec 2025 17:20:23 GMT], [transfer-encoding: chunked]
+- body: {"model":"gpt-oss:20b","created_at":"2025-12-21T17:20:23.7016297Z","message":{"role":"assistant","content":"[{\"order_id\":1001,\"order_datetime\":\"2025-11-01T10:15:00\",\"customer_id\":1,\"order_total\":125.99,\"order_lines\":[{\"order_id\":1001,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":1,\"product_price\":25.99,\"product_qty\":2},{\"order_id\":1001,\"order_line_id\":2,\"order_line_seq_id\":2,\"product_id\":2,\"product_price\":75.5,\"product_qty\":1}]},{\"order_id\":1002,\"order_datetime\":\"2025-11-02T14:20:00\",\"customer_id\":1,\"order_total\":699.99,\"order_lines\":[{\"order_id\":1002,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":4,\"product_price\":699.99,\"product_qty\":1}]},{\"order_id\":1021,\"order_datetime\":\"2025-11-12T09:30:00\",\"customer_id\":1,\"order_total\":60,\"order_lines\":[{\"order_id\":1021,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":3,\"product_price\":60,\"product_qty\":1}]},{\"order_id\":1031,\"order_datetime\":\"2025-11-17T09:10:00\",\"customer_id\":1,\"order_total\":75.5,\"order_lines\":[{\"order_id\":1031,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":2,\"product_price\":75.5,\"product_qty\":1}]},{\"order_id\":1041,\"order_datetime\":\"2025-11-22T09:15:00\",\"customer_id\":1,\"order_total\":99.99,\"order_lines\":[{\"order_id\":1041,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":8,\"product_price\":99.99,\"product_qty\":1}]}]","thinking":"We need to output response as valid JSON only, new lines as \\n, no markdown. The assistant already produced JSON array. We just need to ensure formatting: new lines as \\n. So we should provide JSON array with \\n characters instead of actual new lines. Let's create the JSON string with \\n. We'll copy the array and replace line breaks with \\n.\n\nAlso ensure no markdown. Provide raw JSON string."},"done":true,"done_reason":"stop","total_duration":58134033400,"load_duration":546445400,"prompt_eval_count":937,"prompt_eval_duration":107489200,"eval_count":506,"eval_duration":57310352700}
+
+2025-12-21T11:20:23.709-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "user",
+    "content" : "Create a short summary of the following conversation between one or more AI agents and a user.\nMention all the agents involved in the conversation.\nDo not provide any additional information, just the summary.\nThe user conversation is: 'User: \"Alice Johnson\n\"\nCustomersAgent agent: \"{\"customer_id\":1,\"customer_name\":\"Alice Johnson\",\"email\":\"alice.johnson@example.com\",\"phone_number\":\"9876543210\"}\"\nUser: \"customer_id=1\n\"\nOrdersAgent agent: \"[{\"order_id\":1001,\"order_datetime\":\"2025-11-01T10:15:00\",\"customer_id\":1,\"order_total\":125.99,\"order_lines\":[{\"order_id\":1001,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":1,\"product_price\":25.99,\"product_qty\":2},{\"order_id\":1001,\"order_line_id\":2,\"order_line_seq_id\":2,\"product_id\":2,\"product_price\":75.5,\"product_qty\":1}]},{\"order_id\":1002,\"order_datetime\":\"2025-11-02T14:20:00\",\"customer_id\":1,\"order_total\":699.99,\"order_lines\":[{\"order_id\":1002,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":4,\"product_price\":699.99,\"product_qty\":1}]},{\"order_id\":1021,\"order_datetime\":\"2025-11-12T09:30:00\",\"customer_id\":1,\"order_total\":60,\"order_lines\":[{\"order_id\":1021,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":3,\"product_price\":60,\"product_qty\":1}]},{\"order_id\":1031,\"order_datetime\":\"2025-11-17T09:10:00\",\"customer_id\":1,\"order_total\":75.5,\"order_lines\":[{\"order_id\":1031,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":2,\"product_price\":75.5,\"product_qty\":1}]},{\"order_id\":1041,\"order_datetime\":\"2025-11-22T09:15:00\",\"customer_id\":1,\"order_total\":99.99,\"order_lines\":[{\"order_id\":1041,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":8,\"product_price\":99.99,\"product_qty\":1}]}]\"\n'.\n\nYou must answer strictly in the following JSON format: {\n\"summary\": (type: string)\n}"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ ]
+}
+
+2025-12-21T11:20:58.211-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP response:
+- status code: 200
+- headers: [content-length: 1111], [content-type: application/json; charset=utf-8], [date: Sun, 21 Dec 2025 17:20:58 GMT]
+- body: {"model":"gpt-oss:20b","created_at":"2025-12-21T17:20:58.2102015Z","message":{"role":"assistant","content":"{\"summary\":\"User requested data for Alice Johnson. CustomersAgent returned the customer record. User then asked for customer_id=1, and OrdersAgent supplied all orders associated with that customer.\"}","thinking":"We need to create short summary of conversation between AI agents and user. Mention all agents. Provide only summary string. Output must be JSON object with key summary and string value. No other fields. Use JSON format exactly. Should mention CustomersAgent and OrdersAgent. Let's craft summary: \"User queried Alice Johnson data; CustomersAgent returned customer info; User requested customer_id=1; OrdersAgent returned list of orders for that customer.\" Keep concise. Provide string. Ensure JSON string properly escaped if necessary. No extra whitespace? Probably fine.\n\nLet's produce."},"done":true,"done_reason":"stop","total_duration":34495900000,"load_duration":521881400,"prompt_eval_count":597,"prompt_eval_duration":16429531700,"eval_count":158,"eval_duration":17509313300}
+
+2025-12-21T11:20:58.214-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP request:
+- method: POST
+- url: http://localhost:11434/api/chat
+- headers: [Content-Type: application/json]
+- body: {
+  "model" : "gpt-oss:20b",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "You are a planner expert that is provided with a set of agents.\nYou know nothing about any domain, don't take any assumptions about the user request,\nthe only thing that you can do is rely on the provided agents.\n\nYour role is to analyze the user request and decide which one of the provided agents to call next to address it.\nYou return an agent invocation consisting of the name of the agent and the arguments to pass to it.\n\nIf no further agent requests are required, return an agentName of \"done\" and an argument named\n\"response\", where the value of the response argument is a recap of all the performed actions,\nwritten in the same language as the user request.\n\nAgents are provided with their name and description together with a list of applicable arguments\nin the format {'name', 'description', [argument1: type1, argument2: type2]}.\n\nDecide which agent to invoke next, doing things in small steps and\nnever taking any shortcuts or relying on your own knowledge.\nEven if the user's request is already clear or explicit, don't make any assumptions and use the agents.\nBe sure to query ALL necessary agents.\n\nThe comma separated list of available agents is: '{'CustomersAgent_CustomersAgent', 'This agent helps to find customer data', [UserMessage: String]}, {'OrdersAgent_OrdersAgent', 'This agent helps to find Orders data', [UserMessage: String]}'.\n\nUse the following supervisor context to better understand constraints, policies or preferences when creating the plan 'Always use available subAgents configured. if any Specific Customer's Order data to be fetched from `OrdersAgent` then first get the customer_id from Customer's data using `CustomersAgent`, Always answer in English. When invoking agent, use pure JSON (no backticks, and new lines as backslash+n).'.\n"
+  }, {
+    "role" : "user",
+    "content" : "The user request is: '`customer_name` is `Alice Johnson`, get the Orders purchased by this customer'.\nThe last received response is: ''.\n\nYou must answer strictly in the following JSON format: {\n\"agentName\": (type: string),\n\"arguments\": (type: java.util.Map)\n}"
+  }, {
+    "role" : "assistant",
+    "content" : "{\"agentName\":\"CustomersAgent_CustomersAgent\",\"arguments\":{\"UserMessage\":\"Alice Johnson\"}}",
+    "tool_calls" : [ ]
+  }, {
+    "role" : "user",
+    "content" : "The user request is: '`customer_name` is `Alice Johnson`, get the Orders purchased by this customer'.\nThe last received response is: '{\"customer_id\":1,\"customer_name\":\"Alice Johnson\",\"email\":\"alice.johnson@example.com\",\"phone_number\":\"9876543210\"}'.\n\nYou must answer strictly in the following JSON format: {\n\"agentName\": (type: string),\n\"arguments\": (type: java.util.Map)\n}"
+  }, {
+    "role" : "assistant",
+    "content" : "{\"agentName\":\"OrdersAgent_OrdersAgent\",\"arguments\":{\"UserMessage\":\"customer_id=1\"}}",
+    "tool_calls" : [ ]
+  }, {
+    "role" : "user",
+    "content" : "Considering this context \"User requested data for Alice Johnson. CustomersAgent returned the customer record. User then asked for customer_id=1, and OrdersAgent supplied all orders associated with that customer.\"\nThe user request is: '`customer_name` is `Alice Johnson`, get the Orders purchased by this customer'.\nThe last received response is: '[{\"order_id\":1001,\"order_datetime\":\"2025-11-01T10:15:00\",\"customer_id\":1,\"order_total\":125.99,\"order_lines\":[{\"order_id\":1001,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":1,\"product_price\":25.99,\"product_qty\":2},{\"order_id\":1001,\"order_line_id\":2,\"order_line_seq_id\":2,\"product_id\":2,\"product_price\":75.5,\"product_qty\":1}]},{\"order_id\":1002,\"order_datetime\":\"2025-11-02T14:20:00\",\"customer_id\":1,\"order_total\":699.99,\"order_lines\":[{\"order_id\":1002,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":4,\"product_price\":699.99,\"product_qty\":1}]},{\"order_id\":1021,\"order_datetime\":\"2025-11-12T09:30:00\",\"customer_id\":1,\"order_total\":60,\"order_lines\":[{\"order_id\":1021,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":3,\"product_price\":60,\"product_qty\":1}]},{\"order_id\":1031,\"order_datetime\":\"2025-11-17T09:10:00\",\"customer_id\":1,\"order_total\":75.5,\"order_lines\":[{\"order_id\":1031,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":2,\"product_price\":75.5,\"product_qty\":1}]},{\"order_id\":1041,\"order_datetime\":\"2025-11-22T09:15:00\",\"customer_id\":1,\"order_total\":99.99,\"order_lines\":[{\"order_id\":1041,\"order_line_id\":1,\"order_line_seq_id\":1,\"product_id\":8,\"product_price\":99.99,\"product_qty\":1}]}]'.\n\nYou must answer strictly in the following JSON format: {\n\"agentName\": (type: string),\n\"arguments\": (type: java.util.Map)\n}"
+  } ],
+  "options" : {
+    "stop" : [ ]
+  },
+  "stream" : false,
+  "tools" : [ ]
+}
+
+2025-12-21T11:21:39.701-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.http.client.log.LoggingHttpClient    : HTTP response:
+- status code: 200
+- headers: [content-length: 525], [content-type: application/json; charset=utf-8], [date: Sun, 21 Dec 2025 17:21:39 GMT]
+- body: {"model":"gpt-oss:20b","created_at":"2025-12-21T17:21:39.6996344Z","message":{"role":"assistant","content":"{\"agentName\":\"done\",\"arguments\":{\"response\":\"The orders for Alice Johnson have been retrieved and provided.\"}}","thinking":"We have already fetched orders. The user request was fulfilled. We can respond with done."},"done":true,"done_reason":"stop","total_duration":41480813400,"load_duration":526218500,"prompt_eval_count":1158,"prompt_eval_duration":35251444900,"eval_count":50,"eval_duration":5571130100}
+
+2025-12-21T11:21:39.703-06:00  INFO 19380 --- [springai] [nio-8080-exec-1] d.l.a.supervisor.SupervisorPlanner       : Agent Invocation: AgentInvocation{agentName='done', arguments={response=The orders for Alice Johnson have been retrieved and provided.}}
+Lc4JSupervisorController - getLLMResponse() : LLM Response :
+[{"order_id":1001,"order_datetime":"2025-11-01T10:15:00","customer_id":1,"order_total":125.99,"order_lines":[{"order_id":1001,"order_line_id":1,"order_line_seq_id":1,"product_id":1,"product_price":25.99,"product_qty":2},{"order_id":1001,"order_line_id":2,"order_line_seq_id":2,"product_id":2,"product_price":75.5,"product_qty":1}]},{"order_id":1002,"order_datetime":"2025-11-02T14:20:00","customer_id":1,"order_total":699.99,"order_lines":[{"order_id":1002,"order_line_id":1,"order_line_seq_id":1,"product_id":4,"product_price":699.99,"product_qty":1}]},{"order_id":1021,"order_datetime":"2025-11-12T09:30:00","customer_id":1,"order_total":60,"order_lines":[{"order_id":1021,"order_line_id":1,"order_line_seq_id":1,"product_id":3,"product_price":60,"product_qty":1}]},{"order_id":1031,"order_datetime":"2025-11-17T09:10:00","customer_id":1,"order_total":75.5,"order_lines":[{"order_id":1031,"order_line_id":1,"order_line_seq_id":1,"product_id":2,"product_price":75.5,"product_qty":1}]},{"order_id":1041,"order_datetime":"2025-11-22T09:15:00","customer_id":1,"order_total":99.99,"order_lines":[{"order_id":1041,"order_line_id":1,"order_line_seq_id":1,"product_id":8,"product_price":99.99,"product_qty":1}]}]
+
+
+===============
+
+Customers agent API
+
+GET http://localhost:8080/customers/api/v1/lc4j/llm?question=do all customers have unique email id? if yes, then list the email-ids, summarize each email domain counts
+GET http://localhost:8080/customers/api/v1/lc4j/llm?question=email is alice.johnson@example.com
+GET http://localhost:8080/customers/api/v1/lc4j/llm?question=do all customers have unique email id? if yes, then list the email-ids
+GET http://localhost:8080/customers/api/v1/lc4j/llm?question=list out customer data where phone number exists
+GET http://localhost:8080/customers/api/v1/lc4j/llm?question=list out customer data having same last name
+GET http://localhost:8080/customers/api/v1/lc4j/llm?question=list out the customers data where the email id is gmail.com
+GET http://localhost:8080/customers/api/v1/lc4j/llm?question=list out the customers data having same phone number
+GET http://localhost:8080/customers/api/v1/lc4j/llm?question=list out the customers data by count of male, female, others
+GET http://localhost:8080/customers/api/v1/lc4j/llm?question=customer_name is Alice Johnson
+
+ORDERS AGENT API
+
+http://localhost:8080/orders/api/v1/lc4j/llm
+http://localhost:8080/orders/api/v1/lc4j/llm?question=what are the unique products purchased by customer_id=1
+http://localhost:8080/orders/api/v1/lc4j/llm?question=what is the order total value from customer_id=1
+http://localhost:8080/orders/api/v1/lc4j/llm?question=what is the orders dates along with order_id data for customer_id=1
+http://localhost:8080/orders/api/v1/lc4j/llm?question=List out the year and month plus the order_id data of orders placed by customer_id=1
+http://localhost:8080/orders/api/v1/lc4j/llm?question=List out the lowest price and largest price of the product along with order id, order date purchased  by customer_id=1
+

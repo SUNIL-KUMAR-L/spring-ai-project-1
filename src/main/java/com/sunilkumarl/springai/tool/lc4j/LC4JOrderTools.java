@@ -18,7 +18,7 @@ public class LC4JOrderTools {
         this.orderService = orderService;
     }
 
-   // @Tool("Fetch Orders data given the Order attribute name and Orders attribute value")
+    @Tool("Fetch Orders data given the Order attribute name and Orders attribute value")
     public List<Order> findOrdersByAttributeNameAndValue(String orderAttributeName, String orderAttributeValue) {
         System.out.println("Tool (findOrdersByAttributeNameAndValue) : ARGUMENTS order lookup by key : " + orderAttributeName + " and value : " + orderAttributeValue);
         if(!LOOK_UP_ALLOWED_ORDER_ATTRIBUTES.contains(orderAttributeName)) {
